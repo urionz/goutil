@@ -8,7 +8,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/goofy/color"
+	"github.com/urionz/color"
 	"github.com/urionz/goutil/strutil"
 )
 

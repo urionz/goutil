@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/goofy/color"
 	"github.com/stretchr/testify/assert"
+	"github.com/urionz/color"
 )
 
 func ExamplePrint() {
