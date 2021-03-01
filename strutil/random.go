@@ -3,22 +3,56 @@ package strutil
 import (
 	"crypto/md5"
 	"crypto/rand"
+	"crypto/sha1"
+	"crypto/sha256"
 	"encoding/base64"
 	"encoding/hex"
 	"fmt"
+	"io/ioutil"
 	mathRand "math/rand"
 	"time"
 )
 
 const (
-	AlphaBet  = "abcdefghijklmnopqrstuvwxyz"
-	AlphaNum  = "abcdefghijklmnopqrstuvwxyz0123456789"
-	AlphaNum2 = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	AlphaNumber = "0123456789"
+	AlphaBet    = "abcdefghijklmnopqrstuvwxyz"
+	AlphaNum    = "abcdefghijklmnopqrstuvwxyz0123456789"
+	AlphaNum2   = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 )
+
+func Sha1(src interface{}) string {
+	h := sha1.New()
+	if s, ok := src.(string); ok {
+		h.Write([]byte(s))
+	} else {
+		h.Write([]byte(fmt.Sprint(src)))
+	}
+	return hex.EncodeToString(h.Sum(nil))
+}
+
+func Sha256(src interface{}) string {
+	h := sha256.New()
+	if s, ok := src.(string); ok {
+		h.Write([]byte(s))
+	} else {
+		h.Write([]byte(fmt.Sprint(src)))
+	}
+	return hex.EncodeToString(h.Sum(nil))
+}
 
 // Md5 Generate a 32-bit md5 string
 func Md5(src interface{}) string {
 	return GenMd5(src)
+}
+
+func Md5File(path string) string {
+	content, err := ioutil.ReadFile(path)
+	if err != nil {
+		panic(err)
+	}
+	h := md5.New()
+	h.Write(content)
+	return hex.EncodeToString(h.Sum(nil))
 }
 
 // GenMd5 Generate a 32-bit md5 string
@@ -31,6 +65,27 @@ func GenMd5(src interface{}) string {
 	}
 
 	return hex.EncodeToString(h.Sum(nil))
+}
+
+func RandomBetween(min, max int64) string {
+	var result int64
+	if min > max || min == 0 || max == 0 {
+		result = max
+	}
+	result = mathRand.Int63n(max-min) + min
+	return fmt.Sprintf("%d", result)
+}
+
+func RandomNumbers(ln int) string {
+	cs := make([]byte, ln)
+	for i := 0; i < ln; i++ {
+		// 1607400451937462000
+		mathRand.Seed(time.Now().UnixNano())
+		idx := mathRand.Intn(9) // 0 - 25
+		cs[i] = AlphaNumber[idx]
+	}
+
+	return string(cs)
 }
 
 // RandomChars generate give length random chars at `a-z`

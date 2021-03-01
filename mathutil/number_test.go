@@ -4,8 +4,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/gookit/goutil/mathutil"
 	"github.com/stretchr/testify/assert"
+	"github.com/urionz/goutil/mathutil"
 )
 
 func TestPercent(t *testing.T) {

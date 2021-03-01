@@ -3,7 +3,7 @@ package goutil
 import (
 	"fmt"
 
-	"github.com/gookit/goutil/mathutil"
+	"github.com/urionz/goutil/mathutil"
 )
 
 // Value data store

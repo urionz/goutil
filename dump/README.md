@@ -2,13 +2,13 @@
 
 This is an print debug vars util package.
 
-- Github: https://github.com/gookit/goutil/dump
-- GoDoc: https://pkg.go.dev/github.com/gookit/goutil/dump
+- Github: https://github.com/urionz/goutil/dump
+- GoDoc: https://pkg.go.dev/github.com/urionz/goutil/dump
 
 ## Install
 
 ```bash
-go get github.com/gookit/goutil/dump
+go get github.com/urionz/goutil/dump
 ```
 
 ## Usage
@@ -18,7 +18,7 @@ run demo: `go run ./dump/_examples/demo1.go`
 ```go
 package main
 
-import "github.com/gookit/goutil/dump"
+import "github.com/urionz/goutil/dump"
 
 // rum demo: go run ./dump/_examples/demo1.go
 func main() {

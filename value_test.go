@@ -3,8 +3,8 @@ package goutil_test
 import (
 	"testing"
 
-	"github.com/gookit/goutil"
 	"github.com/stretchr/testify/assert"
+	"github.com/urionz/goutil"
 )
 
 func TestValue_Val(t *testing.T) {

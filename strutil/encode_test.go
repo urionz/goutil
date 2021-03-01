@@ -3,8 +3,8 @@ package strutil_test
 import (
 	"testing"
 
-	"github.com/gookit/goutil/strutil"
 	"github.com/stretchr/testify/assert"
+	"github.com/urionz/goutil/strutil"
 )
 
 func TestEscape(t *testing.T) {

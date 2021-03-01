@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/gookit/goutil/testutil"
 	"github.com/stretchr/testify/assert"
+	"github.com/urionz/goutil/testutil"
 )
 
 func TestMockRequest(t *testing.T) {

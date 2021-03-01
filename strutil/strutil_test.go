@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/gookit/goutil/strutil"
 	"github.com/stretchr/testify/assert"
+	"github.com/urionz/goutil/strutil"
 )
 
 func TestIsAlphabet(t *testing.T) {

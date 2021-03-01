@@ -14,3 +14,8 @@ func RandomInt(min, max int) int {
 	rand.Seed(time.Now().UnixNano())
 	return min + rand.Intn(max-min)
 }
+
+func RandomInt64(min, max int64) int64 {
+	rand.Seed(time.Now().UnixNano())
+	return min + rand.Int63n(max-min)
+}

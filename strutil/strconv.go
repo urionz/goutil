@@ -8,7 +8,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/gookit/goutil/mathutil"
+	"github.com/urionz/goutil/mathutil"
 )
 
 var (
@@ -172,11 +172,6 @@ func ToSlice(s string, sep ...string) []string {
 
 	return Split(s, ",")
 }
-
-// ToOSArgs split string to string[](such as os.Args)
-// func ToOSArgs(s string) []string {
-// 	return cliutil.StringToOSArgs(s) // error: import cycle not allowed
-// }
 
 // ToTime convert date string to time.Time
 func ToTime(s string, layouts ...string) (t time.Time, err error) {

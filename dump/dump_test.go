@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/gookit/color"
+	"github.com/goofy/color"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -32,7 +32,7 @@ func ExamplePrint() {
 	)
 
 	// Output like:
-	// PRINT AT github.com/gookit/goutil/dump.ExamplePrint(LINE 14):
+	// PRINT AT github.com/urionz/goutil/dump.ExamplePrint(LINE 14):
 	// int(23)
 	// []string{"ab", "cd"}
 	// []int [
@@ -91,9 +91,9 @@ func TestPrint(t *testing.T) {
 
 	// print position
 	Fprint(buf, 123)
-	// "PRINT AT github.com/gookit/goutil/dump.TestPrint(dump_test.go:65)"
+	// "PRINT AT github.com/urionz/goutil/dump.TestPrint(dump_test.go:65)"
 	str := buf.String()
-	is.Contains(str, "PRINT AT github.com/gookit/goutil/dump.TestPrint(dump_test.go:")
+	is.Contains(str, "PRINT AT github.com/urionz/goutil/dump.TestPrint(dump_test.go:")
 	is.Contains(str, "int(123)")
 
 	// disable caller position for test
@@ -184,7 +184,7 @@ func TestStruct_CannotExportField(t *testing.T) {
 	Print(myOpts)
 
 	// OUT:
-	// PRINT AT github.com/gookit/goutil/dump.TestStruct_CannotExportField(dump_test.go:202)
+	// PRINT AT github.com/urionz/goutil/dump.TestStruct_CannotExportField(dump_test.go:202)
 	// struct { opt0 *int; opt1 bool; opt2 int; opt3 float64; opt4 string } {
 	//  opt0: <nil>,
 	//  opt1: true,

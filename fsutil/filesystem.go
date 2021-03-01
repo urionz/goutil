@@ -139,8 +139,7 @@ func CreateFile(fpath string, filePerm, dirPerm os.FileMode) (*os.File, error) {
 			return nil, err
 		}
 	}
-
-	return os.OpenFile(fpath, os.O_RDWR|os.O_CREATE|os.O_TRUNC, filePerm)
+	return os.OpenFile(fpath, os.O_RDWR|os.O_TRUNC|os.O_CREATE, filePerm)
 }
 
 // MustCreateFile create file, will panic on error

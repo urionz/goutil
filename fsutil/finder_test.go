@@ -5,8 +5,8 @@ import (
 	"os"
 	"testing"
 
-	"github.com/gookit/goutil/fsutil"
 	"github.com/stretchr/testify/assert"
+	"github.com/urionz/goutil/fsutil"
 )
 
 func TestEmptyFinder(t *testing.T) {
@@ -22,12 +22,14 @@ func TestEmptyFinder(t *testing.T) {
 			fmt.Println(filePath)
 		})
 
-	fsutil.NewFinder([]string{"./testdata"}).
+	fsutil.EmptyFinder().
+		AddDir("./testdata").
 		AddFile("finder.go").
 		NoDotDir().
 		EachStat(func(fi os.FileInfo, filePath string) {
 			fmt.Println(filePath, "=>", fi.ModTime())
 		})
+
 }
 
 func TestDotFileFilterFunc(t *testing.T) {
@@ -102,5 +104,4 @@ func TestExtFilterFunc(t *testing.T) {
 	fn = fsutil.ExtFilterFunc([]string{".log"}, false)
 	assert.False(t, fn("info.log", ""))
 	assert.True(t, fn("info.tmp", ""))
-
 }

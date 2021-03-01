@@ -3,8 +3,8 @@ package envutil
 import (
 	"testing"
 
-	"github.com/gookit/goutil/testutil"
 	"github.com/stretchr/testify/assert"
+	"github.com/urionz/goutil/testutil"
 )
 
 func TestParseEnvValue(t *testing.T) {

@@ -5,9 +5,9 @@ import (
 	"os"
 	"testing"
 
-	"github.com/gookit/goutil/envutil"
-	"github.com/gookit/goutil/fsutil"
 	"github.com/stretchr/testify/assert"
+	"github.com/urionz/goutil/envutil"
+	"github.com/urionz/goutil/fsutil"
 )
 
 func TestCommon(t *testing.T) {
@@ -63,39 +63,38 @@ func TestMkdir(t *testing.T) {
 
 func TestCreateFile(t *testing.T) {
 	// TODO windows will error
-	// if envutil.IsWin() {
-	// 	return
-	// }
+	if envutil.IsWin() {
+		return
+	}
 
 	file, err := fsutil.CreateFile("./testdata/test.txt", 0664, 0666)
 	if assert.NoError(t, err) {
 		assert.Equal(t, "./testdata/test.txt", file.Name())
-		assert.NoError(t, file.Close())
 		assert.NoError(t, os.Remove(file.Name()))
+		assert.NoError(t, file.Close())
 	}
 
 	file, err = fsutil.CreateFile("./testdata/sub/test.txt", 0664, 0777)
 	if assert.NoError(t, err) {
 		assert.Equal(t, "./testdata/sub/test.txt", file.Name())
-		assert.NoError(t, file.Close())
 		assert.NoError(t, os.RemoveAll("./testdata/sub"))
+		assert.NoError(t, file.Close())
 	}
 
 	file, err = fsutil.CreateFile("./testdata/sub/sub2/test.txt", 0664, 0777)
 	if assert.NoError(t, err) {
 		assert.Equal(t, "./testdata/sub/sub2/test.txt", file.Name())
-		assert.NoError(t, file.Close())
 		assert.NoError(t, os.RemoveAll("./testdata/sub"))
+		assert.NoError(t, file.Close())
 	}
 }
 
 func TestQuickOpenFile(t *testing.T) {
-	fname := "./testdata/quick-open-file.txt"
-	file, err := fsutil.QuickOpenFile(fname)
+	file, err := fsutil.QuickOpenFile("./testdata/quick-open-file.txt")
 	if assert.NoError(t, err) {
-		assert.Equal(t, fname, file.Name())
-		assert.NoError(t, file.Close())
+		assert.Equal(t, "./testdata/quick-open-file.txt", file.Name())
 		assert.NoError(t, os.Remove(file.Name()))
+		assert.NoError(t, file.Close())
 	}
 }
 

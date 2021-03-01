@@ -3,8 +3,8 @@ package maputil_test
 import (
 	"testing"
 
-	"github.com/gookit/goutil/maputil"
 	"github.com/stretchr/testify/assert"
+	"github.com/urionz/goutil/maputil"
 )
 
 func TestMergeStringMap(t *testing.T) {
@@ -13,6 +13,14 @@ func TestMergeStringMap(t *testing.T) {
 
 	ret = maputil.MergeStringMap(map[string]string{"A": "v0"}, map[string]string{"a": "v1"}, true)
 	assert.Equal(t, map[string]string{"a": "v0"}, ret)
+}
+
+func TestKeyToLower(t *testing.T) {
+	src := map[string]string{"A": "v0"}
+	ret := maputil.KeyToLower(src)
+
+	assert.Contains(t, ret, "a")
+	assert.NotContains(t, ret, "A")
 }
 
 func TestGetByPath(t *testing.T) {

@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"os/exec"
 
-	"github.com/gookit/goutil/strutil"
+	"github.com/urionz/goutil/strutil"
 )
 
 // QuickExec quick exec an simple command line

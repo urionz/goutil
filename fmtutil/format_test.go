@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/gookit/goutil/fmtutil"
 	"github.com/stretchr/testify/assert"
+	"github.com/urionz/goutil/fmtutil"
 )
 
 func TestDataSize(t *testing.T) {

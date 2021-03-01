@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/gookit/goutil/fmtutil"
+	"github.com/urionz/goutil/fmtutil"
 )
 
 // Percent returns a values percent of the total

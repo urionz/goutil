@@ -4,8 +4,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/gookit/goutil/cliutil"
 	"github.com/stretchr/testify/assert"
+	"github.com/urionz/goutil/cliutil"
 )
 
 func TestCurrentShell(t *testing.T) {
@@ -30,9 +30,9 @@ func TestExecCmd(t *testing.T) {
 	assert.NoError(t, err)
 	assert.Equal(t, "OK1", strings.TrimSpace(ret))
 
-	ret, err = cliutil.QuickExec("echo OK2")
+	ret, err = cliutil.QuickExec("echo OK")
 	assert.NoError(t, err)
-	assert.Equal(t, "OK2", strings.TrimSpace(ret))
+	assert.Equal(t, "OK", strings.TrimSpace(ret))
 }
 
 func TestShellExec(t *testing.T) {

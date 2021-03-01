@@ -6,9 +6,9 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/gookit/goutil/sysutil"
-	"github.com/gookit/goutil/testutil"
 	"github.com/stretchr/testify/assert"
+	"github.com/urionz/goutil/sysutil"
+	"github.com/urionz/goutil/testutil"
 )
 
 func TestCurrentShell(t *testing.T) {

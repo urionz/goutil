@@ -8,8 +8,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/gookit/goutil/strutil"
 	"github.com/stretchr/testify/assert"
+	"github.com/urionz/goutil/strutil"
 )
 
 func TestMd5(t *testing.T) {

@@ -4,8 +4,8 @@ import (
 	"os"
 	"testing"
 
-	"github.com/gookit/goutil/sysutil/process"
 	"github.com/stretchr/testify/assert"
+	"github.com/urionz/goutil/sysutil/process"
 )
 
 func TestProcessExists(t *testing.T) {

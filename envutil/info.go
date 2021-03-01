@@ -6,7 +6,7 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/gookit/goutil/sysutil"
+	"github.com/urionz/goutil/sysutil"
 )
 
 // IsWin system. linux windows darwin

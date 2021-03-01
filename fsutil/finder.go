@@ -8,7 +8,6 @@ import (
 	"regexp"
 	"sort"
 	"strings"
-	"time"
 )
 
 // FileFilter for filter file path.
@@ -66,19 +65,11 @@ type FileMeta struct {
 
 // FindResults struct
 type FindResults struct {
-	f *FileFilter
-
-	// founded file paths.
-	filePaths []string
-
-	// filters
-	dirFilters  []DirFilter  // filters for filter dir paths
-	fileFilters []FileFilter // filters for filter file paths
-	// bodyFilters []BodyFilter // filters for filter file contents
+	paths []string
 }
 
 func (r *FindResults) append(filePath ...string) {
-	r.filePaths = append(r.filePaths, filePath...)
+	r.paths = append(r.paths, filePath...)
 }
 
 // Result get find paths
@@ -98,27 +89,15 @@ func (r *FindResults) Each() *FindResults {
 
 // Result get find paths
 func (r *FindResults) Result() []string {
-	return r.filePaths
+	return r.paths
 }
-
-// TODO use excludeDotFlag 1 file 2 dir 1|2 both
-type exDotFlag uint8
-
-const (
-	ExDotFile exDotFlag = 1
-	ExDotDir  exDotFlag = 2
-)
 
 // FileFinder struct
 type FileFinder struct {
-	// r *FindResults
-
 	// mark has been run find()
 	founded bool
 	// dir paths for find file.
 	dirPaths []string
-	// file paths for filter.
-	srcFiles []string
 
 	// builtin include filters
 	includeDirs []string // include dir names. eg: {"model"}
@@ -129,16 +108,14 @@ type FileFinder struct {
 	excludeExts  []string // exclude ext names. eg: {".go", ".md"}
 	excludeNames []string // exclude file names. eg: {"go.mod"}
 
-	// builtin dot filters.
-	// TODO use excludeDotFlag 1 file 2 dir 1|2 both
-	// excludeDotFlag exDotFlag
 	excludeDotDir  bool
 	excludeDotFile bool
 
-	// fileFlags int
+	fileFlags int
 
 	dirFilters  []DirFilter  // filters for filter dir paths
 	fileFilters []FileFilter // filters for filter file paths
+	// bodyFilters []BodyFilter // filters for filter file contents
 
 	// founded file paths.
 	filePaths []string
@@ -364,9 +341,9 @@ func (f *FileFinder) findInDir(dirPath string) {
 
 			var ok bool
 			if hasDirFilter {
-				for _, df := range f.dirFilters {
-					ok = df.FilterDir(fullPath, name)
-					if true == ok { // 有一个满足即可
+				for _, dFilter := range f.dirFilters {
+					ok = dFilter.FilterDir(fullPath, name)
+					if false == ok {
 						break
 					}
 				}
@@ -391,9 +368,9 @@ func (f *FileFinder) findInDir(dirPath string) {
 		// use custom filter functions
 		var ok bool
 		if hasFileFilter {
-			for _, ff := range f.fileFilters {
-				ok = ff.FilterFile(fullPath, name)
-				if true == ok { // 有一个满足即可
+			for _, pfFunc := range f.fileFilters {
+				ok = pfFunc.FilterFile(fullPath, name)
+				if false == ok {
 					break
 				}
 			}
@@ -535,32 +512,6 @@ func DotFileFilterFunc(include bool) FileFilterFunc {
 	return func(filePath, filename string) bool {
 		// filename := path.Base(filePath)
 		if filename[0] == '.' {
-			return include
-		}
-
-		return !include
-	}
-}
-
-// ModTimeFilterFunc filter file by modify time.
-func ModTimeFilterFunc(limitSec int, op rune, include bool) FileFilterFunc {
-	return func(filePath, filename string) bool {
-		fi, err := os.Stat(filePath)
-		if err != nil {
-			return !include
-		}
-
-		now := time.Now().Second()
-		if op == '>' {
-			if now-fi.ModTime().Second() > limitSec {
-				return include
-			}
-
-			return !include
-		}
-
-		// '<'
-		if now-fi.ModTime().Second() < limitSec {
 			return include
 		}
 
