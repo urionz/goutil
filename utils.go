@@ -5,7 +5,9 @@ import (
 	"bytes"
 	"errors"
 	"fmt"
+	"io/ioutil"
 	"os"
+	"path"
 	"reflect"
 	"runtime"
 	"strings"
@@ -13,6 +15,7 @@ import (
 
 	"github.com/urionz/goutil/jsonutil"
 	"golang.org/x/crypto/bcrypt"
+	"golang.org/x/mod/modfile"
 )
 
 // Go is a basic promise implementation: it wraps calls a function in a goroutine
@@ -223,4 +226,12 @@ func RetryFunc(attempt int, fn func() error, sleep ...time.Duration) error {
 		return err
 	}
 	return nil
+}
+
+func GetModName(root string) string {
+	b, err := ioutil.ReadFile(path.Join(root, "go.mod"))
+	if err != nil {
+		return ""
+	}
+	return modfile.ModulePath(b)
 }
